@@ -38,7 +38,7 @@ export const PRODUCTS_DATABASE = [
     stock: 14,
     rating: 4.9,
     reviewsCount: 28,
-    image: '/products/brembo_brake_pads.jpg',
+    image: './products/brembo_brake_pads.jpg',
     description: 'Pastillas de freno de alto rendimiento formuladas con compuesto cerámico ecológico Brembo. Reducen el polvo en las llantas, eliminan ruidos y ofrecen excelente mordida térmica.',
     specifications: [
       { key: 'Posición', value: 'Eje Delantero' },
@@ -60,7 +60,7 @@ export const PRODUCTS_DATABASE = [
     stock: 8,
     rating: 4.8,
     reviewsCount: 19,
-    image: '/products/bosch_brake_rotor_pair.jpg',
+    image: './products/bosch_brake_rotor_pair.jpg',
     description: 'Discos de freno ventilados Bosch maquinados con precisión al carbono. Balance dinámico de fábrica para frenadas suaves sin vibraciones en el pedal.',
     specifications: [
       { key: 'Diámetro Exterior', value: '255 mm' },
@@ -82,7 +82,7 @@ export const PRODUCTS_DATABASE = [
     stock: 6,
     rating: 5.0,
     reviewsCount: 42,
-    image: '/products/kyb_shock_absorbers.jpg',
+    image: './products/kyb_shock_absorbers.jpg',
     description: 'Par de amortiguadores a nitrógeno presurizado KYB Excel-G. Restauran el control original del vehículo, mejorando la estabilidad en curvas y frenado de emergencia.',
     specifications: [
       { key: 'Construcción', value: 'Bitubo a Gas Nitro' },
@@ -102,7 +102,7 @@ export const PRODUCTS_DATABASE = [
     stock: 45,
     rating: 4.9,
     reviewsCount: 65,
-    image: '/products/mann_oil_filter.jpg',
+    image: './products/mann_oil_filter.jpg',
     description: 'Filtro de aceite blindado Mann-Filter de máxima retención microbiana. Protege los componentes internos del motor reteniendo partículas abrasivas de hasta 10 micras.',
     specifications: [
       { key: 'Rosca', value: '3/4-16 UNF' },
@@ -122,7 +122,7 @@ export const PRODUCTS_DATABASE = [
     stock: 22,
     rating: 5.0,
     reviewsCount: 88,
-    image: '/products/mobil_oil_bottle.jpg',
+    image: './products/mobil_oil_bottle.jpg',
     description: 'Lubricante sintético avanzado formulado para ayudar a proporcionar una limpieza excepcional, protección contra el desgaste y rendimiento general en motores benzineros y diésel DPF.',
     specifications: [
       { key: 'Viscosidad', value: '5W-30' },
@@ -142,7 +142,7 @@ export const PRODUCTS_DATABASE = [
     stock: 5,
     rating: 4.7,
     reviewsCount: 12,
-    image: '/products/valeo_timing_belt_kit.jpg',
+    image: './products/valeo_timing_belt_kit.jpg',
     description: 'Kit completo de correa dentada sincronizada, poleas tensoras HNBR reforzadas y bomba de agua de turbina metálica para servicio integral de motor.',
     specifications: [
       { key: 'Dientes Correa', value: '117 Dientes' },
@@ -162,7 +162,7 @@ export const PRODUCTS_DATABASE = [
     stock: 30,
     rating: 4.9,
     reviewsCount: 51,
-    image: '/products/ngk_spark_plugs.jpg',
+    image: './products/ngk_spark_plugs.jpg',
     description: 'Bujías de encendido de fina punta de Iridio con electrodo de platino. Garantizan encendido instantáneo, optimización del consumo de combustible y durabilidad de 100.000 km.',
     specifications: [
       { key: 'Electrodo', value: 'Iridio 0.6mm' },
@@ -182,7 +182,7 @@ export const PRODUCTS_DATABASE = [
     stock: 10,
     rating: 4.8,
     reviewsCount: 37,
-    image: '/products/bosch_car_battery.jpg',
+    image: './products/bosch_car_battery.jpg',
     description: 'Batería de aleación de plata Bosch S4 con tecnología PowerFrame. Potencia de arranque garantizada en frío para vehículos con alto equipamiento electrónico.',
     specifications: [
       { key: 'Capacidad', value: '65 Ah' },
