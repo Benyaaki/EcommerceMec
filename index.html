@@ -357,6 +357,114 @@ Me gustaría cotizar repuestos para mi vehículo:
         </button>
       </div>
     </div>
+  <!-- ===================== PANEL DE ADMINISTRACIÓN (ADMIN DASHBOARD) ===================== -->
+  <section class="view" id="view-admin">
+    <div class="container admin-container">
+      <div class="admin-header">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-chart-line"></i> Panel de Control del Dueño</span>
+          <h1 class="admin-title">Métricas & Gestión de Inventario</h1>
+          <p class="admin-sub">Control total de ventas, tasa de conversión, visitas web y administración de repuestos.</p>
+        </div>
+        <button class="btn btn-primary" id="btn-add-product-modal"><i class="fa-solid fa-plus"></i> Nuevo Repuesto</button>
+      </div>
+
+      <!-- Tarjetas de Métricas en Tiempo Real -->
+      <div class="admin-metrics-grid">
+        <div class="metric-card glass">
+          <div class="metric-icon blue"><i class="fa-solid fa-sack-dollar"></i></div>
+          <div class="metric-info">
+            <span class="metric-label">Ingresos Totales por Ventas</span>
+            <h3 class="metric-value">$4.850.000 CLP</h3>
+            <span class="metric-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +18.4% este mes</span>
+          </div>
+        </div>
+
+        <div class="metric-card glass">
+          <div class="metric-icon green"><i class="fa-solid fa-percent"></i></div>
+          <div class="metric-info">
+            <span class="metric-label">Tasa de Conversión (Compras)</span>
+            <h3 class="metric-value">3.8%</h3>
+            <span class="metric-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +0.6% vs promedio</span>
+          </div>
+        </div>
+
+        <div class="metric-card glass">
+          <div class="metric-icon purple"><i class="fa-solid fa-eye"></i></div>
+          <div class="metric-info">
+            <span class="metric-label">Visitas Totales a la Web</span>
+            <h3 class="metric-value">12.450</h3>
+            <span class="metric-trend up"><i class="fa-solid fa-users"></i> 420 visitas hoy</span>
+          </div>
+        </div>
+
+        <div class="metric-card glass">
+          <div class="metric-icon orange"><i class="fa-solid fa-cart-check"></i></div>
+          <div class="metric-info">
+            <span class="metric-label">Cotizaciones & Pedidos</span>
+            <h3 class="metric-value">148</h3>
+            <span class="metric-trend up"><i class="fa-brands fa-whatsapp"></i> 92% vía WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pestañas de Gestión -->
+      <div class="admin-tabs-row">
+        <button class="admin-tab active" data-tab="products"><i class="fa-solid fa-boxes-stacked"></i> Repuestos en Catálogo</button>
+        <button class="admin-tab" data-tab="sales"><i class="fa-solid fa-chart-pie"></i> Reporte de Ventas & Canales</button>
+      </div>
+
+      <!-- Tab Content: Productos -->
+      <div class="admin-tab-content active" id="tab-admin-products">
+        <div class="table-responsive glass">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre del Repuesto</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th>Precio (CLP)</th>
+                <th>Stock</th>
+                <th>Código OEM</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-tbody">
+              <!-- Renderizado dinámico de productos -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Content: Métricas & Ventas -->
+      <div class="admin-tab-content" id="tab-admin-sales">
+        <div class="admin-analytics-grid">
+          <div class="analytics-card glass">
+            <h3><i class="fa-solid fa-chart-column"></i> Ventas Semanales</h3>
+            <div class="chart-bars-mock">
+              <div class="bar-col"><div class="bar" style="height: 60%;"></div><span>Lun</span></div>
+              <div class="bar-col"><div class="bar" style="height: 85%;"></div><span>Mar</span></div>
+              <div class="bar-col"><div class="bar" style="height: 45%;"></div><span>Mié</span></div>
+              <div class="bar-col"><div class="bar" style="height: 95%;"></div><span>Jue</span></div>
+              <div class="bar-col"><div class="bar" style="height: 70%;"></div><span>Vie</span></div>
+              <div class="bar-col"><div class="bar active" style="height: 100%;"></div><span>Sáb</span></div>
+              <div class="bar-col"><div class="bar" style="height: 80%;"></div><span>Dom</span></div>
+            </div>
+          </div>
+
+          <div class="analytics-card glass">
+            <h3><i class="fa-solid fa-share-nodes"></i> Origen del Tráfico</h3>
+            <div class="traffic-sources-list">
+              <div class="source-item"><span>Búsqueda Google</span><b>48%</b></div>
+              <div class="source-item"><span>WhatsApp Directo</span><b>28%</b></div>
+              <div class="source-item"><span>Instagram / Facebook</span><b>14%</b></div>
+              <div class="source-item"><span>Tráfico Directo</span><b>10%</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   </main>
@@ -383,6 +491,7 @@ Me gustaría cotizar repuestos para mi vehículo:
           <a href="#/tienda" data-route="/tienda">Tienda</a>
           <a href="#/nosotros" data-route="/nosotros">Nosotros</a>
           <a href="#/contacto" data-route="/contacto">Contacto</a>
+          <a href="#/admin" data-route="/admin" style="color:var(--blue-soft);font-weight:700;"><i class="fa-solid fa-user-shield"></i> Panel Admin</a>
           <a href="#" data-legal="terms">Términos</a>
           <a href="#" data-legal="privacy">Privacidad</a>
         </div>
@@ -501,8 +610,64 @@ Me gustaría cotizar repuestos para mi vehículo:
     <div id="legal-body"></div>
   </dialog>
 
-  <button class="to-top" id="to-top" title="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
-  <div class="toast-wrap" id="toast-wrap"></div>
+  <!-- Modal para Agregar / Editar Producto -->
+  <dialog class="modal glass" id="modal-product-form" style="max-width:580px;width:92%;padding:28px;border-radius:24px;background:rgba(15,23,42,.95);">
+    <div class="modal-head" style="display:flex;justify-space-between;align-items:center;margin-bottom:20px;">
+      <h3 id="form-product-title" style="font-family:var(--font-display);font-size:1.3rem;">Añadir Nuevo Repuesto</h3>
+      <button class="modal-close" id="close-product-form" style="background:none;border:none;color:var(--ink-2);font-size:1.2rem;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="product-crud-form" class="crud-form" style="display:flex;flex-direction:column;gap:14px;">
+      <input type="hidden" id="crud-id">
+      <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Nombre del Repuesto *</label>
+        <input type="text" id="crud-name" required placeholder="Ej: Pastillas de Freno Cerámicas Brembo P85020" style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+      </div>
+      <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Marca *</label>
+          <input type="text" id="crud-brand" required placeholder="Ej: Brembo" style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+        </div>
+        <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Categoría *</label>
+          <select id="crud-category" required style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+            <option value="frenos">Frenos</option>
+            <option value="suspension">Suspensión</option>
+            <option value="filtros">Aceites & Filtros</option>
+            <option value="motor">Motor</option>
+            <option value="electricidad">Electricidad</option>
+          </select>
+        </div>
+      </div>
+      <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Precio (CLP) *</label>
+          <input type="number" id="crud-price" required placeholder="Ej: 34990" style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+        </div>
+        <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Stock Disponible *</label>
+          <input type="number" id="crud-stock" required placeholder="Ej: 15" style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+        </div>
+      </div>
+      <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Código OEM</label>
+          <input type="text" id="crud-oem" placeholder="Ej: 04465-0D050" style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+        </div>
+        <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Ruta / URL de Imagen *</label>
+          <input type="text" id="crud-image" required placeholder="./products/brembo_brake_pads.jpg" style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;">
+        </div>
+      </div>
+      <div class="field" style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:.78rem;font-weight:700;color:var(--ink-2);">Descripción del Repuesto</label>
+        <textarea id="crud-description" rows="3" placeholder="Descripción técnica del repuesto..." style="padding:10px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(9,13,20,.8);color:#fff;"></textarea>
+      </div>
+      <div class="form-actions" style="display:flex;justify-content:flex-end;gap:10px;margin-top:12px;">
+        <button type="button" class="btn btn-dark" id="cancel-product-form">Cancelar</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar Repuesto</button>
+      </div>
+    </form>
+  </dialog>
 
   <script type="module" src="/src/main.js"></script>
 </body>

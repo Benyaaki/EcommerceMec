@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWishlist();
   initModals();
   initContact();
+  initAdminPanel();
   initExtras();
 
   renderCatalog();
@@ -593,4 +594,158 @@ function toast(msg, type = 'success') {
   el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
   $('#toast-wrap').appendChild(el);
   setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateY(10px)'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+
+/* ========================= ADMIN PANEL ========================= */
+function initAdminPanel() {
+  const tbody = $('#admin-products-tbody');
+  const tabs = $$('.admin-tab');
+  const tabContents = $$('.admin-tab-content');
+  const modalForm = $('#modal-product-form');
+  const btnAdd = $('#btn-add-product-modal');
+  const btnClose = $('#close-product-form');
+  const btnCancel = $('#cancel-product-form');
+  const crudForm = $('#product-crud-form');
+
+  // Load custom products from localStorage if present
+  try {
+    const customProds = JSON.parse(localStorage.getItem('autopart_custom_products') || '[]');
+    if (Array.isArray(customProds) && customProds.length > 0) {
+      customProds.forEach(cp => {
+        if (!PRODUCTS_DATABASE.some(p => p.id === cp.id)) {
+          PRODUCTS_DATABASE.unshift(cp);
+        }
+      });
+    }
+  } catch (e) {}
+
+  // Tab navigation inside admin
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(tc => tc.classList.remove('active'));
+      tab.classList.add('active');
+      $(`#tab-admin-${target}`)?.classList.add('active');
+    });
+  });
+
+  function renderAdminProductsTable() {
+    if (!tbody) return;
+    tbody.innerHTML = PRODUCTS_DATABASE.map(p => `
+      <tr data-id="${p.id}">
+        <td><img src="${p.image}" alt="${p.name}" class="admin-img-thumb"></td>
+        <td><strong>${p.name}</strong></td>
+        <td><span class="chip">${p.brand}</span></td>
+        <td><span style="text-transform:capitalize;">${p.category}</span></td>
+        <td><strong style="color:var(--blue-soft);">${formatCLP(p.price)}</strong></td>
+        <td><span class="card-stock ${p.stock < 10 ? 'low' : ''}">${p.stock} un.</span></td>
+        <td><code style="font-family:var(--font-mono);font-size:.76rem;">${p.oemCode || '—'}</code></td>
+        <td>
+          <div class="admin-actions">
+            <button type="button" class="admin-btn-sm admin-btn-edit" data-edit="${p.id}"><i class="fa-solid fa-pen"></i> Editar</button>
+            <button type="button" class="admin-btn-sm admin-btn-del" data-del="${p.id}"><i class="fa-solid fa-trash"></i> Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // Open modal for new product
+  btnAdd?.addEventListener('click', () => {
+    $('#form-product-title').textContent = 'Añadir Nuevo Repuesto';
+    crudForm.reset();
+    $('#crud-id').value = '';
+    modalForm.showModal();
+  });
+
+  // Close modal
+  [btnClose, btnCancel].forEach(b => b?.addEventListener('click', () => modalForm.close()));
+
+  // Table actions (Edit / Delete)
+  tbody?.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('[data-edit]');
+    const delBtn = e.target.closest('[data-del]');
+
+    if (editBtn) {
+      const id = editBtn.getAttribute('data-edit');
+      const prod = PRODUCTS_DATABASE.find(p => p.id === id);
+      if (!prod) return;
+      $('#form-product-title').textContent = 'Editar Repuesto';
+      $('#crud-id').value = prod.id;
+      $('#crud-name').value = prod.name;
+      $('#crud-brand').value = prod.brand;
+      $('#crud-category').value = prod.category;
+      $('#crud-price').value = prod.price;
+      $('#crud-stock').value = prod.stock;
+      $('#crud-oem').value = prod.oemCode || '';
+      $('#crud-image').value = prod.image;
+      $('#crud-description').value = prod.description || '';
+      modalForm.showModal();
+    }
+
+    if (delBtn) {
+      const id = delBtn.getAttribute('data-del');
+      if (confirm('¿Estás seguro de eliminar este repuesto del inventario?')) {
+        const idx = PRODUCTS_DATABASE.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          PRODUCTS_DATABASE.splice(idx, 1);
+          renderAdminProductsTable();
+          renderCatalog();
+          saveCustomProducts();
+          toast('Repuesto eliminado del inventario.', 'warning');
+        }
+      }
+    }
+  });
+
+  // Save product form
+  crudForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = $('#crud-id').value;
+    const name = $('#crud-name').value.trim();
+    const brand = $('#crud-brand').value.trim();
+    const category = $('#crud-category').value;
+    const price = parseInt($('#crud-price').value) || 0;
+    const stock = parseInt($('#crud-stock').value) || 0;
+    const oemCode = $('#crud-oem').value.trim();
+    const image = $('#crud-image').value.trim();
+    const description = $('#crud-description').value.trim();
+
+    if (id) {
+      // Edit
+      const prod = PRODUCTS_DATABASE.find(p => p.id === id);
+      if (prod) {
+        prod.name = name; prod.brand = brand; prod.category = category;
+        prod.price = price; prod.stock = stock; prod.oemCode = oemCode;
+        prod.image = image; prod.description = description;
+      }
+      toast('Repuesto actualizado con éxito', 'success');
+    } else {
+      // Add
+      const newId = 'prod-custom-' + Date.now();
+      const newProd = {
+        id: newId, name, brand, category, price, stock, oemCode, image, description,
+        rating: 5.0, reviewsCount: 1, sku: 'AUT-' + Math.floor(1000 + Math.random() * 9000),
+        specifications: [{ key: 'Origen', value: 'Importación Directa' }],
+        compatibleVehicles: ['v-toyota-yaris-2018-15', 'v-hyundai-accent-2019-14']
+      };
+      PRODUCTS_DATABASE.unshift(newProd);
+      toast('Nuevo repuesto agregado al catálogo', 'success');
+    }
+
+    renderAdminProductsTable();
+    renderCatalog();
+    saveCustomProducts();
+    modalForm.close();
+  });
+
+  function saveCustomProducts() {
+    try {
+      const custom = PRODUCTS_DATABASE.filter(p => p.id.startsWith('prod-custom-'));
+      localStorage.setItem('autopart_custom_products', JSON.stringify(custom));
+    } catch (e) {}
+  }
+
+  renderAdminProductsTable();
 }
