@@ -21,7 +21,7 @@
     <div class="nav-inner">
       <div class="island island-main" id="island-main">
         <a href="#/" class="brand" data-route="/">
-          <div class="brand-mark"><span>A</span></div>
+          <img src="/logomecanico.png" alt="AUTOPART Logo" class="brand-img-logo">
           <div class="brand-name">AUTO<b>PART</b></div>
         </a>
         <nav class="island-nav">
@@ -279,87 +279,125 @@
   </section>
 
   <!-- =========================================================================
-       CONTACTO
+       CONTACTO — Cotizador Interactivo en 3 Pasos estilo Pill Selector
        ========================================================================= -->
   <section class="view" id="view-contacto">
     <div class="container page-head">
-      <h1>Pide tu <span class="accent-serif">cotización</span> por <span class="gradient-text">WhatsApp.</span></h1>
-      <p>Cuéntanos qué vehículo tienes y qué pieza buscas. Te responderemos al instante con precio, disponibilidad y calce garantizado.</p>
+      <h1>Arma tu <span class="accent-serif">cotización</span> en <span class="gradient-text">3 pasos.</span></h1>
+      <p>Selecciona tus opciones en segundos y generamos tu solicitud formal enviada directo a WhatsApp.</p>
     </div>
 
-    <div class="container contacto-layout">
-      <!-- Phone mockups: ejemplos de cotizaciones en teléfonos OLED 3D -->
-      <div class="phones">
-        <div class="phone phone-back glass">
-          <div class="phone-notch"></div>
-          <div class="phone-status"><span>9:41</span><span><i class="fa-solid fa-signal"></i> 5G</span></div>
-          <div class="phone-screen">
-            <div class="quote-head"><span>Cotización WhatsApp</span><b>#AR-4821</b></div>
-            <div class="quote-veh"><i class="fa-solid fa-car-side"></i> Honda Civic 2017 · 1.5T</div>
-            <div class="quote-line"><span>Discos Brembo P85020</span><b>$34.990</b></div>
-            <div class="quote-line"><span>Filtro Mann W68/3</span><b>$8.990</b></div>
-            <div class="quote-line"><span>Despacho Express RM</span><b class="ok-txt">Gratis</b></div>
-            <div class="quote-total"><span>Total final</span><b class="tot-val">$43.980</b></div>
-            <div class="quote-badge"><i class="fa-solid fa-circle-check"></i> Calce 100% garantizado</div>
+    <div class="container contact-step-builder-wrapper">
+      <div class="builder-card glass">
+        <!-- paso 1 -->
+        <div class="step-block">
+          <div class="step-tag">1 · ¿QUÉ CATEGORÍA DE REPUESTO BUSCAS?</div>
+          <div class="pill-group" id="builder-step-1">
+            <button type="button" class="pill-opt active" data-val="Frenos & Discos de Freno">Frenos & Discos</button>
+            <button type="button" class="pill-opt" data-val="Aceites & Filtros de Motor">Aceites & Filtros</button>
+            <button type="button" class="pill-opt" data-val="Suspensión & Amortiguadores">Suspensión & Amortiguadores</button>
+            <button type="button" class="pill-opt" data-val="Baterías & Bujías Iridium">Baterías & Electricidad</button>
+            <button type="button" class="pill-opt" data-val="Otro Repuesto Específico">Otro repuesto</button>
           </div>
         </div>
-        <div class="phone phone-front glass">
-          <div class="phone-notch"></div>
-          <div class="phone-status"><span>9:42</span><span><i class="fa-solid fa-wifi"></i> 100%</span></div>
-          <div class="phone-screen">
-            <div class="quote-head"><span>Cotización Directa</span><b>#AR-4907</b></div>
-            <div class="quote-veh"><i class="fa-solid fa-car-side"></i> Toyota Yaris 2018 · 1.5L</div>
-            <div class="quote-line"><span>Kit Amortiguadores KYB</span><b>$119.900</b></div>
-            <div class="quote-line"><span>Bujías NGK Iridium x4</span><b>$39.990</b></div>
-            <div class="quote-line off"><span>Cupón AUTO10</span><b>-$15.989</b></div>
-            <div class="quote-total"><span>Total a pagar</span><b class="tot-val">$143.901</b></div>
-            <button class="quote-btn"><i class="fa-solid fa-shield-halved"></i> Aprobar y pagar</button>
-          </div>
-        </div>
-      </div>
 
-      <form class="contact-form glass" id="contact-form">
-        <div class="form-ws-badge"><i class="fa-brands fa-whatsapp"></i> <span>Atención al instante vía WhatsApp</span></div>
-        <div class="field"><label>Nombre y Apellido *</label><input type="text" id="ct-name" placeholder="Ej: Juan Pérez" required></div>
-        <div class="two">
-          <div class="field"><label>Teléfono WhatsApp *</label><input type="tel" id="ct-phone" placeholder="+56 9 1234 5678" required></div>
-          <div class="field"><label>Despacho *</label><select id="ct-region" required><option value="Región Metropolitana">Región Metropolitana</option><option value="Otras Regiones de Chile">Otras Regiones de Chile</option></select></div>
+        <!-- paso 2 -->
+        <div class="step-block">
+          <div class="step-tag">2 · ¿MARCA O VEHÍCULO?</div>
+          <div class="pill-group" id="builder-step-2">
+            <button type="button" class="pill-opt active" data-val="Toyota / Nissan">Toyota / Nissan</button>
+            <button type="button" class="pill-opt" data-val="Hyundai / Kia">Hyundai / Kia</button>
+            <button type="button" class="pill-opt" data-val="Chevrolet / Suzuki">Chevrolet / Suzuki</button>
+            <button type="button" class="pill-opt" data-val="Ford / Peugeot / VW">Ford / Peugeot / VW</button>
+            <button type="button" class="pill-opt" data-val="Otra marca / Escribir detalle">Otra marca</button>
+          </div>
         </div>
-        <div class="field"><label>Vehículo (Marca, Modelo, Año, Motor) *</label><input type="text" id="ct-vehicle" placeholder="Ej: Toyota Yaris 2018 1.5L / Patente o Chasis" required></div>
-        <div class="field"><label>¿Qué repuestos buscas o código OEM? *</label><textarea id="ct-msg" rows="3" placeholder="Ej: Pastillas de freno delanteras y filtro de aceite Mann W68/3" required></textarea></div>
-        <button type="submit" class="btn btn-ws-direct btn-block" id="ct-send-ws"><i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp ahora</button>
-        <div class="contact-mini">
-          <span><i class="fa-solid fa-clock"></i> Respuesta en &lt; 5 minutos</span>
-          <span><i class="fa-solid fa-shield-halved"></i> Asesoría técnica gratuita</span>
+
+        <!-- paso 3 -->
+        <div class="step-block">
+          <div class="step-tag">3 · ¿LUGAR DE DESPACHO O RECOGIDA?</div>
+          <div class="pill-group" id="builder-step-3">
+            <button type="button" class="pill-opt active" data-val="Santiago / Región Metropolitana">Santiago / RM (Express)</button>
+            <button type="button" class="pill-opt" data-val="Envío a Regiones de Chile">Regiones de Chile</button>
+            <button type="button" class="pill-opt" data-val="Retiro en Taller / Local">Retiro en Taller</button>
+          </div>
         </div>
-      </form>
+
+        <!-- Campos personalizados opcionales -->
+        <div class="builder-custom-fields">
+          <div class="two">
+            <div class="field">
+              <label>Tu Nombre o Taller (opcional)</label>
+              <input type="text" id="b-name" placeholder="Ej: Carlos Silva">
+            </div>
+            <div class="field">
+              <label>Patente / Chasis / Código OEM (opcional)</label>
+              <input type="text" id="b-vehicle-custom" placeholder="Ej: BB-CC-12 o OEM 17801-0T020">
+            </div>
+          </div>
+        </div>
+
+        <!-- Vista previa de Mensaje estilo Imagen 1 -->
+        <div class="preview-box">
+          <div class="preview-tag">TU MENSAJE GENERADO:</div>
+          <div class="preview-content" id="builder-live-preview">Hola AUTOPART,
+
+Me gustaría cotizar repuestos para mi vehículo:
+
+► Categoría: Frenos & Discos de Freno
+► Marca/Vehículo: Toyota / Nissan
+► Despacho: Santiago / Región Metropolitana
+
+¿Tienen disponibilidad y precio con calce 100% garantizado? ¡Quedo atento/a!</div>
+        </div>
+
+        <button type="button" class="btn btn-ws-submit" id="btn-ws-builder">
+          <span>Enviar por WhatsApp</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+      </div>
     </div>
   </section>
 
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
+  <!-- ===================== FOOTER — Rediseño Elegante con Watermark y Emblem Logo ===================== -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <div>
-        <a href="#/" class="brand" data-route="/"><div class="brand-mark"><span>A</span></div><div class="brand-name">AUTO<b>PART</b></div></a>
-        <p class="footer-desc">Repuestos automotrices con calce garantizado y despacho a todo Chile.</p>
-        <div class="social">
+    <div class="footer-bg-watermark">AUTOPART</div>
+    <div class="container footer-centered-content">
+      <div class="footer-brand-block">
+        <a href="#/" class="footer-brand" data-route="/">
+          <img src="/logomecanico.png" alt="AUTOPART Logo" class="footer-logo-img">
+          <span class="footer-brand-title">AUTO<b>PART</b></span>
+        </a>
+        <p class="footer-tagline">Plataforma inteligente de repuestos automotrices de precisión.<br>Calce 100% garantizado y despacho a las 16 regiones de Chile.</p>
+        
+        <div class="footer-social-icons">
+          <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
+
+        <div class="footer-nav-row">
+          <a href="#/" data-route="/">Inicio</a>
+          <a href="#/tienda" data-route="/tienda">Tienda</a>
+          <a href="#/nosotros" data-route="/nosotros">Nosotros</a>
+          <a href="#/contacto" data-route="/contacto">Contacto</a>
+          <a href="#" data-legal="terms">Términos</a>
+          <a href="#" data-legal="privacy">Privacidad</a>
+        </div>
       </div>
-      <nav class="footer-nav">
-        <a href="#/" data-route="/">Inicio</a>
-        <a href="#/tienda" data-route="/tienda">Tienda</a>
-        <a href="#/nosotros" data-route="/nosotros">Nosotros</a>
-        <a href="#/contacto" data-route="/contacto">Contacto</a>
-        <a href="#" data-legal="terms">Términos</a>
-        <a href="#" data-legal="privacy">Privacidad</a>
-      </nav>
+
+      <div class="footer-badge-float">
+        <img src="/logomecanico.png" alt="AUTOPART Emblem">
+      </div>
+
+      <div class="footer-bottom-row">
+        <span>© 2026 AUTOPART Chile. Todos los derechos reservados.</span>
+        <span>Desarrollado con precisión por <strong>Calfers</strong></span>
+      </div>
     </div>
-    <div class="container footer-bottom"><span>© 2025 AUTOPART — Demo de e-commerce automotriz</span></div>
   </footer>
 
   <!-- ===================== BUSCADOR ===================== -->

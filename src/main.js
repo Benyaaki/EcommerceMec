@@ -489,30 +489,68 @@ function initCheckout() {
     setTimeout(() => { openSuccess(name, rut, email, total); state.cart = []; state.coupon = null; saveStorage(); updateCartUI(); }, 1200);
   });
 }
-function initContactForm() {
-  const form = $('#contact-form');
-  if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = $('#ct-name').value.trim();
-    const phone = $('#ct-phone').value.trim();
-    const region = $('#ct-region').value;
-    const vehicle = $('#ct-vehicle').value.trim();
-    const msg = $('#ct-msg').value.trim();
+function initContactBuilder() {
+  const container = $('.contact-step-builder-wrapper');
+  if (!container) return;
 
-    const text = `*Hola AutoPart! Quisiera solicitar una cotización:*%0A` +
-      `👤 *Nombre:* ${encodeURIComponent(name)}%0A` +
-      `📱 *Teléfono:* ${encodeURIComponent(phone)}%0A` +
-      `📦 *Despacho:* ${encodeURIComponent(region)}%0A` +
-      `🚗 *Vehículo:* ${encodeURIComponent(vehicle)}%0A` +
-      `🛠️ *Repuesto o Código OEM:* ${encodeURIComponent(msg)}`;
+  const step1 = $('#builder-step-1');
+  const step2 = $('#builder-step-2');
+  const step3 = $('#builder-step-3');
+  const preview = $('#builder-live-preview');
+  const customName = $('#b-name');
+  const customVeh = $('#b-vehicle-custom');
+  const btn = $('#btn-ws-builder');
 
-    const wsUrl = `https://wa.me/56987654321?text=${text}`;
-    toast('Abriendo conversación de WhatsApp…', 'success');
-    setTimeout(() => {
-      window.open(wsUrl, '_blank');
-    }, 400);
+  function getSelectedVal(groupEl) {
+    const active = groupEl?.querySelector('.pill-opt.active');
+    return active ? active.getAttribute('data-val') : '';
+  }
+
+  function updatePreview() {
+    const cat = getSelectedVal(step1);
+    const brand = getSelectedVal(step2);
+    const shipping = getSelectedVal(step3);
+    const nameVal = customName ? customName.value.trim() : '';
+    const customVehVal = customVeh ? customVeh.value.trim() : '';
+
+    let greeting = nameVal ? `Hola AUTOPART, soy ${nameVal}.` : `Hola AUTOPART,`;
+    let customNote = customVehVal ? `\n► Detalle/OEM: ${customVehVal}` : '';
+
+    const textMsg = `${greeting}\n\nMe gustaría cotizar repuestos para mi vehículo:\n\n► Categoría: ${cat}\n► Marca/Vehículo: ${brand}\n► Despacho: ${shipping}${customNote}\n\n¿Tienen disponibilidad y precio con calce 100% garantizado? ¡Quedo atento/a!`;
+
+    if (preview) {
+      preview.textContent = textMsg;
+    }
+    return textMsg;
+  }
+
+  [step1, step2, step3].forEach(group => {
+    if (!group) return;
+    group.addEventListener('click', (e) => {
+      const btnEl = e.target.closest('.pill-opt');
+      if (!btnEl) return;
+      group.querySelectorAll('.pill-opt').forEach(p => p.classList.remove('active'));
+      btnEl.classList.add('active');
+      updatePreview();
+    });
   });
+
+  [customName, customVeh].forEach(inp => {
+    if (inp) inp.addEventListener('input', updatePreview);
+  });
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const msg = updatePreview();
+      const wsUrl = `https://wa.me/56987654321?text=${encodeURIComponent(msg)}`;
+      toast('Redirigiendo a WhatsApp…', 'success');
+      setTimeout(() => {
+        window.open(wsUrl, '_blank');
+      }, 400);
+    });
+  }
+
+  updatePreview();
 }
 
 function openCheckout() {
@@ -540,7 +578,7 @@ function openLegal(k) { const l = LEGAL[k]; if (!l) return; $('#legal-body').inn
 
 /* ========================= CONTACTO ========================= */
 function initContact() {
-  initContactForm();
+  initContactBuilder();
 }
 
 /* ========================= EXTRAS ========================= */
