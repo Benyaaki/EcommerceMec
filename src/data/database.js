@@ -60,7 +60,7 @@ export const PRODUCTS_DATABASE = [
     stock: 8,
     rating: 4.8,
     reviewsCount: 19,
-    image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format&fit=crop&q=80',
+    image: '/products/bosch_brake_rotor_pair.jpg',
     description: 'Discos de freno ventilados Bosch maquinados con precisión al carbono. Balance dinámico de fábrica para frenadas suaves sin vibraciones en el pedal.',
     specifications: [
       { key: 'Diámetro Exterior', value: '255 mm' },
@@ -122,7 +122,7 @@ export const PRODUCTS_DATABASE = [
     stock: 22,
     rating: 5.0,
     reviewsCount: 88,
-    image: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&auto=format&fit=crop&q=80',
+    image: '/products/mobil_oil_bottle.jpg',
     description: 'Lubricante sintético avanzado formulado para ayudar a proporcionar una limpieza excepcional, protección contra el desgaste y rendimiento general en motores benzineros y diésel DPF.',
     specifications: [
       { key: 'Viscosidad', value: '5W-30' },
@@ -142,8 +142,8 @@ export const PRODUCTS_DATABASE = [
     stock: 5,
     rating: 4.7,
     reviewsCount: 12,
-    image: 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=800&auto=format&fit=crop&q=80',
-    description: 'Kit completo de correa dentada sincronizada, poleas tensoras HNBR reinforced y bomba de agua de turbina metálica para servicio integral de motor.',
+    image: '/products/valeo_timing_belt_kit.jpg',
+    description: 'Kit completo de correa dentada sincronizada, poleas tensoras HNBR reforzadas y bomba de agua de turbina metálica para servicio integral de motor.',
     specifications: [
       { key: 'Dientes Correa', value: '117 Dientes' },
       { key: 'Incluye', value: 'Correa + Rodamientos + Bomba Agua' }
@@ -182,7 +182,7 @@ export const PRODUCTS_DATABASE = [
     stock: 10,
     rating: 4.8,
     reviewsCount: 37,
-    image: 'https://images.unsplash.com/photo-1599256872237-5dcc0fbe9668?w=600&auto=format&fit=crop&q=80',
+    image: '/products/bosch_car_battery.jpg',
     description: 'Batería de aleación de plata Bosch S4 con tecnología PowerFrame. Potencia de arranque garantizada en frío para vehículos con alto equipamiento electrónico.',
     specifications: [
       { key: 'Capacidad', value: '65 Ah' },
