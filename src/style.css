@@ -472,8 +472,11 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   width:auto;height:auto;margin-bottom:32px;display:grid;place-items:center;
   background:none!important;border:none!important;box-shadow:none!important;padding:0!important;
 }
-.footer-badge-float img{height:165px;width:auto;object-fit:contain;filter:invert(1) brightness(1.2);transition:transform .3s var(--ease);}
+.footer-badge-float img{height:140px;width:auto;object-fit:contain;filter:invert(1) brightness(1.2);transition:transform .3s var(--ease);}
 .footer-badge-float img:hover{transform:scale(1.08);}
+@media(max-width:640px){
+  .footer-badge-float img{height:68px!important;}
+}
 
 .footer-bottom-row{
   width:100%;display:flex;justify-content:space-between;align-items:center;padding-top:24px;
