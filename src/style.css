@@ -250,7 +250,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 /* Product cards (sobrias) */
 .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 @media(max-width:1100px){.product-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:520px){.product-grid{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .card-body{padding:10px 8px;gap:4px;}
+  .card-title{font-size:.82rem;line-height:1.2;}
+  .card-price{font-size:.95rem;}
+  .card-add-btn{padding:6px 10px;font-size:.68rem;}
+  .card-brand{font-size:.55rem;padding:4px 7px;top:8px;left:8px;}
+  .card-badges{top:8px;right:8px;}
+}
 .card{background:rgba(19,26,38,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-brd);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;position:relative;transition:all .3s var(--ease);box-shadow:var(--sh-sm);}
 .card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:rgba(59,130,246,.3);}
 .card-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2);cursor:pointer;}
@@ -377,15 +385,30 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .quote-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:6px;font-family:var(--font-display);font-weight:700;font-size:1.1rem;}
 .quote-badge{margin-top:16px;text-align:center;font-size:.76rem;font-weight:700;color:#16a34a;background:rgba(22,163,74,.1);border-radius:var(--r-full);padding:8px;}
 .quote-btn{margin-top:16px;width:100%;background:var(--blue);color:#fff;font-weight:700;font-size:.86rem;padding:12px;border-radius:var(--r-full);}
-.brand-img-logo{height:60px;width:auto;object-fit:contain;filter:invert(1) brightness(1.2);transition:transform .2s var(--ease);}
+.brand{display:inline-flex;align-items:center;gap:6px;}
+.brand-img-logo{height:54px;width:auto;object-fit:contain;filter:invert(1) brightness(1.2);transition:transform .2s var(--ease);}
 .brand:hover .brand-img-logo{transform:scale(1.06);}
+@media(max-width:600px){
+  .brand{gap:4px;}
+  .brand-img-logo{height:34px;}
+  .brand-name{font-size:1.02rem;}
+}
 
 /* ==========================================================================
    COTIZADOR EN 3 PASOS — Pill Selector estilo Imagen 1
    ========================================================================== */
 .contact-step-builder-wrapper{max-width:820px;margin:30px auto 80px;}
 .builder-card{padding:42px 36px;border-radius:32px;background:rgba(19,26,38,.88);border:1px solid var(--glass-brd);box-shadow:0 30px 80px rgba(0,0,0,.6);backdrop-filter:blur(30px);display:flex;flex-direction:column;gap:32px;}
-@media(max-width:640px){.builder-card{padding:26px 20px;gap:24px;}}
+@media(max-width:640px){
+  .contact-step-builder-wrapper{margin:15px auto 40px;}
+  .builder-card{padding:18px 14px;border-radius:20px;gap:18px;}
+  .step-block{gap:8px;}
+  .step-tag{font-size:.64rem;}
+  .pill-group{gap:6px;}
+  .pill-opt{font-size:.78rem;padding:7px 11px;}
+  .preview-box{padding:12px 14px;font-size:.8rem;}
+  .btn-ws-submit{padding:12px 16px;font-size:.88rem;}
+}
 
 .step-block{display:flex;flex-direction:column;gap:12px;}
 .step-tag{font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase;}
@@ -449,7 +472,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   width:auto;height:auto;margin-bottom:32px;display:grid;place-items:center;
   background:none!important;border:none!important;box-shadow:none!important;padding:0!important;
 }
-.footer-badge-float img{height:110px;width:auto;object-fit:contain;filter:invert(1) brightness(1.2);transition:transform .3s var(--ease);}
+.footer-badge-float img{height:165px;width:auto;object-fit:contain;filter:invert(1) brightness(1.2);transition:transform .3s var(--ease);}
 .footer-badge-float img:hover{transform:scale(1.08);}
 
 .footer-bottom-row{
