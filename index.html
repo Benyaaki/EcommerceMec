@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AUTOPART — Repuestos automotrices de precisión | Chile</title>
+  <meta name="description" content="Repuestos automotrices con calce garantizado y despacho a todo Chile.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- Fondo silk / liquid glass -->
+  <canvas id="silk-bg"></canvas>
+
+  <!-- ===================== NAVBAR — DOS ISLAS ===================== -->
+  <div class="nav-wrap">
+    <div class="nav-inner">
+      <div class="island island-main" id="island-main">
+        <a href="#/" class="brand" data-route="/">
+          <div class="brand-mark"><span>A</span></div>
+          <div class="brand-name">AUTO<b>PART</b></div>
+        </a>
+        <nav class="island-nav">
+          <a href="#/" data-route="/">Inicio</a>
+          <a href="#/tienda" data-route="/tienda">Tienda</a>
+          <a href="#/nosotros" data-route="/nosotros">Nosotros</a>
+          <a href="#/contacto" data-route="/contacto">Contacto</a>
+        </nav>
+      </div>
+
+      <div class="island island-side">
+        <a href="#/tienda" class="mobile-store-btn" data-route="/tienda"><i class="fa-solid fa-store"></i> <span>Tienda</span></a>
+        <button class="icon-btn" id="open-search" title="Buscar (⌘K)"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="icon-btn wish-btn" id="open-wishlist" title="Guardados"><i class="fa-regular fa-heart"></i><span class="wish-count" id="wish-count">0</span></button>
+        <button class="cart-btn" id="open-cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cart-count">0</span></button>
+        <button class="icon-btn mobile-menu-toggle" id="open-mobile-menu" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Desplegable Movil -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+  <div class="mobile-menu-dropdown glass" id="mobile-menu-dropdown">
+    <div class="mobile-menu-head">
+      <div class="brand">
+        <div class="brand-mark"><span>A</span></div>
+        <div class="brand-name">AUTO<b>PART</b></div>
+      </div>
+      <button class="icon-btn" id="close-mobile-menu"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="mobile-menu-links">
+      <a href="#/" data-route="/" class="mobile-menu-link active"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+      <a href="#/tienda" data-route="/tienda" class="mobile-menu-link"><i class="fa-solid fa-store"></i> <span>Tienda de Repuestos</span> <span class="nav-badge">14.000+</span></a>
+      <a href="#/nosotros" data-route="/nosotros" class="mobile-menu-link"><i class="fa-solid fa-users"></i> <span>Quiénes somos</span></a>
+      <a href="#/contacto" data-route="/contacto" class="mobile-menu-link"><i class="fa-solid fa-envelope"></i> <span>Contacto & Cotización</span></a>
+    </nav>
+    <div class="mobile-menu-foot">
+      <a href="#/tienda" class="btn btn-primary btn-block" id="mm-search-veh"><i class="fa-solid fa-car-side"></i> Buscar repuestos por auto</a>
+    </div>
+  </div>
+
+  <main id="app">
+
+  <!-- =========================================================================
+       HOME — Hero con fondo fotográfico y transición a Canvas
+       ========================================================================= -->
+  <section class="view" id="view-home">
+    <div class="hero-card-container container">
+      <div class="home-hero">
+        <div class="hero-copy">
+          <h1>Repuestos <span class="accent-serif">automotrices</span> de <span class="gradient-text">precisión.</span></h1>
+          <p>Encuentra la pieza exacta para tu auto sin adivinar. Despacho express a todo Chile y asesoría técnica especializada.</p>
+        </div>
+
+        <!-- Barra de búsqueda rápida integrada en Hero -->
+        <div class="hero-search-box glass">
+          <div class="hero-input-group">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="hero-search-input" placeholder="Escribe tu auto, marca, pieza o código OEM (ej: Brembo Yaris 2018)..." autocomplete="off">
+            <button class="btn btn-primary" id="hero-search-btn">Buscar repuesto</button>
+          </div>
+          <div class="hero-quick-tags">
+            <span class="tags-label">Accesos rápidos:</span>
+            <a href="#/tienda" class="tag-btn" data-category="frenos"><i class="fa-solid fa-compact-disc"></i> Frenos</a>
+            <a href="#/tienda" class="tag-btn" data-category="filtros"><i class="fa-solid fa-filter"></i> Aceites & Filtros</a>
+            <a href="#/tienda" class="tag-btn" data-category="suspension"><i class="fa-solid fa-car-side"></i> Suspensión</a>
+            <a href="#/tienda" class="tag-btn" data-category="electricidad"><i class="fa-solid fa-bolt"></i> Baterías & Bujías</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coverflow de repuestos extremo a extremo -->
+    <div class="coverflow-section">
+      <div class="cf-header container">
+        <h2>Piezas destacadas de alta rotación</h2>
+        <p>Haz clic o arrastra para explorar nuestra selección verificada</p>
+      </div>
+      <div class="coverflow" id="coverflow">
+        <div class="cf-stage"><div class="cf-track"></div></div>
+        <div class="cf-nav">
+          <button class="cf-prev icon-btn glass" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="cf-label"></div>
+          <button class="cf-next icon-btn glass" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strip de garantías y confianza -->
+    <div class="container home-strip">
+      <div class="strip-item"><i class="fa-solid fa-shield-halved"></i><div><b>Garantía 6 meses</b><span>en cada repuesto</span></div></div>
+      <div class="strip-item"><i class="fa-solid fa-truck-fast"></i><div><b>Despacho nacional</b><span>gratis sobre $50.000</span></div></div>
+      <div class="strip-item"><i class="fa-solid fa-lock"></i><div><b>Pago seguro</b><span>Webpay · Mercado Pago</span></div></div>
+      <div class="strip-item"><i class="fa-solid fa-headset"></i><div><b>Asesoría técnica</b><span>te ayudamos a elegir</span></div></div>
+    </div>
+
+    <!-- Marquee de marcas borde a borde e infinito -->
+    <div class="marquee-fullwidth glass">
+      <div class="marquee-label">MARCAS ORIGINALES & HOMOLOGADAS:</div>
+      <div class="marquee-track">
+        <span>BREMBO</span><span>BOSCH</span><span>KYB</span><span>MANN-FILTER</span><span>NGK</span><span>VALEO</span><span>MOBIL&nbsp;1</span>
+        <span>BREMBO</span><span>BOSCH</span><span>KYB</span><span>MANN-FILTER</span><span>NGK</span><span>VALEO</span><span>MOBIL&nbsp;1</span>
+        <span>BREMBO</span><span>BOSCH</span><span>KYB</span><span>MANN-FILTER</span><span>NGK</span><span>VALEO</span><span>MOBIL&nbsp;1</span>
+        <span>BREMBO</span><span>BOSCH</span><span>KYB</span><span>MANN-FILTER</span><span>NGK</span><span>VALEO</span><span>MOBIL&nbsp;1</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       TIENDA
+       ========================================================================= -->
+  <section class="view" id="view-tienda">
+    <div class="container page-head">
+      <h1>Tienda</h1>
+      <p>Selecciona tu vehículo para ver solo lo que calza, o explora libremente.</p>
+    </div>
+
+    <div class="container tienda-layout">
+      <aside class="finder glass">
+        <div class="finder-head"><i class="fa-solid fa-car-side"></i> Tu vehículo</div>
+        <form id="finder-form">
+          <div class="field"><label>Marca</label><select id="f-brand"><option value="">Seleccionar</option></select></div>
+          <div class="field"><label>Modelo</label><select id="f-model" disabled><option value="">Seleccionar</option></select></div>
+          <div class="field"><label>Año</label><select id="f-year" disabled><option value="">Seleccionar</option></select></div>
+          <div class="field"><label>Motor</label><select id="f-engine" disabled><option value="">Todos</option></select></div>
+          <button type="submit" class="btn btn-primary btn-block">Buscar compatibles</button>
+          <button type="button" class="btn btn-glass btn-block" id="f-reset" style="display:none;margin-top:8px;">Limpiar filtro</button>
+        </form>
+      </aside>
+
+      <div class="tienda-main">
+        <div class="cat-pills">
+          <button class="cat-pill active" data-cat="all">Todos</button>
+          <button class="cat-pill" data-cat="frenos">Frenos</button>
+          <button class="cat-pill" data-cat="suspension">Suspensión</button>
+          <button class="cat-pill" data-cat="filtros">Aceites & Filtros</button>
+          <button class="cat-pill" data-cat="motor">Motor</button>
+          <button class="cat-pill" data-cat="electricidad">Electricidad</button>
+        </div>
+
+        <div class="catalog-bar">
+          <span class="catalog-count" id="catalog-count">—</span>
+          <div class="catalog-tools">
+            <select id="filter-brand">
+              <option value="all">Todas las marcas</option>
+              <option value="Bosch">Bosch</option><option value="Brembo">Brembo</option>
+              <option value="Mann-Filter">Mann-Filter</option><option value="NGK">NGK</option>
+              <option value="KYB">KYB</option><option value="Valeo">Valeo</option><option value="Mobil 1">Mobil 1</option>
+            </select>
+            <select id="sort-products">
+              <option value="featured">Destacados</option>
+              <option value="price-low">Precio: menor a mayor</option>
+              <option value="price-high">Precio: mayor a menor</option>
+              <option value="name">Nombre A-Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chips" id="chips" style="display:none;"><div id="chips-list"></div></div>
+        <div class="product-grid" id="product-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       DETALLE DE PRODUCTO (Página dedicada con Artículos Relacionados)
+       ========================================================================= -->
+  <section class="view" id="view-producto">
+    <div class="container pdp-container">
+      <a href="#/tienda" class="pdp-back" data-route="/tienda"><i class="fa-solid fa-arrow-left"></i> Volver a la tienda</a>
+      
+      <div class="pdp-card glass" id="pdp-detail-content">
+        <!-- Renderizado dinámico del producto seleccionado -->
+      </div>
+
+      <div class="pdp-related-section">
+        <div class="related-head">
+          <h2>Artículos relacionados</h2>
+          <p>Piezas recomendadas y repuestos compatibles</p>
+        </div>
+        <div class="product-grid" id="pdp-related-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       NOSOTROS — Diseño Editorial sin Exceso de Tarjetas
+       ========================================================================= -->
+  <section class="view" id="view-nosotros">
+    <div class="container page-head">
+      <h1>Ingeniería <span class="accent-serif">antes que</span> <span class="gradient-text">inventario.</span></h1>
+      <p>Nacimos en un taller mecánico, no en una oficina. Sabemos lo que cuesta una pieza equivocada, por eso creamos una plataforma donde primero está la compatibilidad de tu vehículo.</p>
+    </div>
+
+    <!-- Barra Unificada de Estadísticas (Sin tarjetas separadas) -->
+    <div class="container nos-stats-strip glass">
+      <div class="stat-col" data-count="14000"><div class="stat-num"><b id="st-1">0</b>+</div><span>Piezas Verificadas</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-col" data-count="3500"><div class="stat-num"><b id="st-2">0</b>+</div><span>Clientes & Talleres</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-col" data-count="16"><div class="stat-num"><b id="st-3">0</b></div><span>Regiones con Despacho</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-col" data-count="15"><div class="stat-num"><b id="st-4">0</b> Años</div><span>en el Rubro Automotriz</span></div>
+    </div>
+
+    <!-- Línea de Tiempo / Historia -->
+    <div class="container nos-timeline-section">
+      <div class="timeline-head">
+        <h2>Nuestra Trayectoria</h2>
+        <p>De taller especializado a la red de repuestos más precisa de Chile</p>
+      </div>
+      <div class="timeline-stepper">
+        <div class="step-item">
+          <div class="step-year">2011</div>
+          <div class="step-node"></div>
+          <div class="step-info">
+            <h3>Origen en Taller</h3>
+            <p>Comenzamos reparando motores y frenos en Santiago, verificando físicamente cada número OE.</p>
+          </div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item">
+          <div class="step-year">2018</div>
+          <div class="step-node"></div>
+          <div class="step-info">
+            <h3>Base de Calce Garantizado</h3>
+            <p>Desarrollamos nuestra propia matriz de compatibilidad técnica por patente y chasis.</p>
+          </div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item active">
+          <div class="step-year">2026</div>
+          <div class="step-node"></div>
+          <div class="step-info">
+            <h3>Cobertura 16 Regiones</h3>
+            <p>Plataforma digital en vivo con más de 14.000 repuestos en stock y envío express a todo Chile.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Globo COBE 3D sin líneas ni etiquetas flotantes -->
+    <div class="container globe-section">
+      <div class="globe-copy">
+        <h2>Despacho Directo de Arica a Punta Arenas</h2>
+        <p>Enviamos a las 16 regiones del país con seguimiento en tiempo real y asesoría técnica ante cualquier duda.</p>
+        <ul class="globe-cities">
+          <li>Arica</li><li>Antofagasta</li><li>La Serena</li><li>Santiago</li><li>Valparaíso</li><li>Concepción</li><li>Temuco</li><li>Puerto Montt</li><li>Punta Arenas</li>
+        </ul>
+      </div>
+      <div class="globe-wrap" id="globe-container">
+        <canvas id="globe" width="600" height="600"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       CONTACTO
+       ========================================================================= -->
+  <section class="view" id="view-contacto">
+    <div class="container page-head">
+      <h1>Pide tu <span class="accent-serif">cotización</span> por <span class="gradient-text">WhatsApp.</span></h1>
+      <p>Cuéntanos qué vehículo tienes y qué pieza buscas. Te responderemos al instante con precio, disponibilidad y calce garantizado.</p>
+    </div>
+
+    <div class="container contacto-layout">
+      <!-- Phone mockups: ejemplos de cotizaciones en teléfonos OLED 3D -->
+      <div class="phones">
+        <div class="phone phone-back glass">
+          <div class="phone-notch"></div>
+          <div class="phone-status"><span>9:41</span><span><i class="fa-solid fa-signal"></i> 5G</span></div>
+          <div class="phone-screen">
+            <div class="quote-head"><span>Cotización WhatsApp</span><b>#AR-4821</b></div>
+            <div class="quote-veh"><i class="fa-solid fa-car-side"></i> Honda Civic 2017 · 1.5T</div>
+            <div class="quote-line"><span>Discos Brembo P85020</span><b>$34.990</b></div>
+            <div class="quote-line"><span>Filtro Mann W68/3</span><b>$8.990</b></div>
+            <div class="quote-line"><span>Despacho Express RM</span><b class="ok-txt">Gratis</b></div>
+            <div class="quote-total"><span>Total final</span><b class="tot-val">$43.980</b></div>
+            <div class="quote-badge"><i class="fa-solid fa-circle-check"></i> Calce 100% garantizado</div>
+          </div>
+        </div>
+        <div class="phone phone-front glass">
+          <div class="phone-notch"></div>
+          <div class="phone-status"><span>9:42</span><span><i class="fa-solid fa-wifi"></i> 100%</span></div>
+          <div class="phone-screen">
+            <div class="quote-head"><span>Cotización Directa</span><b>#AR-4907</b></div>
+            <div class="quote-veh"><i class="fa-solid fa-car-side"></i> Toyota Yaris 2018 · 1.5L</div>
+            <div class="quote-line"><span>Kit Amortiguadores KYB</span><b>$119.900</b></div>
+            <div class="quote-line"><span>Bujías NGK Iridium x4</span><b>$39.990</b></div>
+            <div class="quote-line off"><span>Cupón AUTO10</span><b>-$15.989</b></div>
+            <div class="quote-total"><span>Total a pagar</span><b class="tot-val">$143.901</b></div>
+            <button class="quote-btn"><i class="fa-solid fa-shield-halved"></i> Aprobar y pagar</button>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form glass" id="contact-form">
+        <div class="form-ws-badge"><i class="fa-brands fa-whatsapp"></i> <span>Atención al instante vía WhatsApp</span></div>
+        <div class="field"><label>Nombre y Apellido *</label><input type="text" id="ct-name" placeholder="Ej: Juan Pérez" required></div>
+        <div class="two">
+          <div class="field"><label>Teléfono WhatsApp *</label><input type="tel" id="ct-phone" placeholder="+56 9 1234 5678" required></div>
+          <div class="field"><label>Despacho *</label><select id="ct-region" required><option value="Región Metropolitana">Región Metropolitana</option><option value="Otras Regiones de Chile">Otras Regiones de Chile</option></select></div>
+        </div>
+        <div class="field"><label>Vehículo (Marca, Modelo, Año, Motor) *</label><input type="text" id="ct-vehicle" placeholder="Ej: Toyota Yaris 2018 1.5L / Patente o Chasis" required></div>
+        <div class="field"><label>¿Qué repuestos buscas o código OEM? *</label><textarea id="ct-msg" rows="3" placeholder="Ej: Pastillas de freno delanteras y filtro de aceite Mann W68/3" required></textarea></div>
+        <button type="submit" class="btn btn-ws-direct btn-block" id="ct-send-ws"><i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp ahora</button>
+        <div class="contact-mini">
+          <span><i class="fa-solid fa-clock"></i> Respuesta en &lt; 5 minutos</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Asesoría técnica gratuita</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#/" class="brand" data-route="/"><div class="brand-mark"><span>A</span></div><div class="brand-name">AUTO<b>PART</b></div></a>
+        <p class="footer-desc">Repuestos automotrices con calce garantizado y despacho a todo Chile.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="#/" data-route="/">Inicio</a>
+        <a href="#/tienda" data-route="/tienda">Tienda</a>
+        <a href="#/nosotros" data-route="/nosotros">Nosotros</a>
+        <a href="#/contacto" data-route="/contacto">Contacto</a>
+        <a href="#" data-legal="terms">Términos</a>
+        <a href="#" data-legal="privacy">Privacidad</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom"><span>© 2025 AUTOPART — Demo de e-commerce automotriz</span></div>
+  </footer>
+
+  <!-- ===================== BUSCADOR ===================== -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-box glass">
+      <div class="search-input-row">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search-input" placeholder="Buscar repuesto, marca o código OEM..." autocomplete="off">
+        <kbd>ESC</kbd>
+      </div>
+      <div class="search-results" id="search-results"><div class="search-hint">Escribe para buscar entre nuestros repuestos.</div></div>
+    </div>
+  </div>
+
+  <!-- ===================== CARRITO ===================== -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer glass" id="drawer">
+    <div class="drawer-head">
+      <h3>Tu carrito <span class="drawer-count" id="drawer-count">0</span></h3>
+      <button id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="ship-bar">
+      <div class="ship-bar-top"><span>Envío gratis sobre $50.000</span><span id="ship-status"></span></div>
+      <div class="ship-track"><div class="ship-fill" id="ship-fill"></div></div>
+    </div>
+    <div class="drawer-body" id="cart-body"></div>
+    <div class="drawer-foot" id="drawer-foot">
+      <div class="coupon-row">
+        <input type="text" id="coupon-input" placeholder="Código de descuento (AUTO10)">
+        <button class="btn btn-dark" id="coupon-apply">Aplicar</button>
+      </div>
+      <div class="sum-row"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+      <div class="sum-row discount-row" id="discount-row" style="display:none;"><span>Descuento <span id="discount-label"></span></span><span id="cart-discount">-$0</span></div>
+      <div class="sum-row"><span>Envío</span><span id="cart-shipping">Gratis</span></div>
+      <div class="sum-row total"><span>Total</span><span id="cart-total">$0</span></div>
+      <button class="btn btn-primary btn-block" id="go-checkout">Ir al checkout</button>
+      <div class="drawer-foot-links"><button id="continue-shopping">← Seguir comprando</button><button id="clear-cart">Vaciar carrito</button></div>
+    </div>
+  </aside>
+
+  <!-- ===================== MODALES ===================== -->
+  <dialog class="modal product-modal" id="product-modal">
+    <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+    <div class="pm-grid" id="product-modal-body"></div>
+  </dialog>
+
+  <dialog class="modal checkout-modal" id="checkout-modal">
+    <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+    <div class="checkout-head">
+      <div class="checkout-head-title">
+        <button class="co-back-btn" id="co-back"><i class="fa-solid fa-arrow-left"></i> Volver al carrito</button>
+        <h2>Checkout seguro</h2>
+      </div>
+      <span class="ssl"><i class="fa-solid fa-shield-halved"></i> SSL 256-bit</span>
+    </div>
+    <div class="checkout-grid">
+      <form class="checkout-form" id="checkout-form">
+        <div class="co-step">
+          <h4>Datos del cliente</h4>
+          <div class="two"><div class="field"><label>RUT *</label><input type="text" id="co-rut" placeholder="12.345.678-9" required></div>
+          <div class="field"><label>Nombre *</label><input type="text" id="co-name" placeholder="Nombre y apellido" required></div></div>
+          <div class="two" style="margin-top:12px;"><div class="field"><label>Correo *</label><input type="email" id="co-email" placeholder="correo@ejemplo.cl" required></div>
+          <div class="field"><label>Teléfono *</label><input type="tel" id="co-phone" placeholder="+56 9 ..." required></div></div>
+        </div>
+        <div class="co-step">
+          <h4>Envío</h4>
+          <div class="two"><div class="field"><label>Región *</label><select id="co-region" required><option value="RM">Región Metropolitana</option><option>Valparaíso</option><option>Biobío</option></select></div>
+          <div class="field"><label>Comuna *</label><input type="text" id="co-city" placeholder="Providencia" required></div></div>
+        </div>
+        <div class="co-step">
+          <h4>Método de pago</h4>
+          <div class="pay-list">
+            <label class="pay-option sel"><input type="radio" name="pay" value="webpay" checked><i class="fa-solid fa-credit-card"></i><div><div class="pt">Webpay Plus</div><div class="ps">Débito y crédito</div></div></label>
+            <label class="pay-option"><input type="radio" name="pay" value="mp"><i class="fa-solid fa-wallet"></i><div><div class="pt">Mercado Pago</div><div class="ps">Saldo y cuotas</div></div></label>
+          </div>
+        </div>
+        <label class="consent"><input type="checkbox" id="co-terms" required><span>Acepto los <a href="#" data-legal="terms">términos</a> y la <a href="#" data-legal="privacy">privacidad</a>.</span></label>
+        <button type="submit" class="btn btn-primary btn-block">Pagar <span id="co-pay-total">$0</span></button>
+      </form>
+      <div class="checkout-summary">
+        <h3>Resumen</h3>
+        <div id="co-summary-items"></div>
+        <div class="co-divider"></div>
+        <div class="sum-row"><span>Subtotal</span><span id="co-subtotal">$0</span></div>
+        <div class="sum-row" id="co-discount-row" style="display:none;"><span>Descuento</span><span id="co-discount">-$0</span></div>
+        <div class="sum-row"><span>Envío</span><span id="co-shipping">Gratis</span></div>
+        <div class="sum-row total"><span>Total</span><span id="co-total">$0</span></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal success-modal" id="success-modal">
+    <div class="s-ico"><i class="fa-solid fa-circle-check"></i></div>
+    <h2>¡Pedido confirmado!</h2>
+    <p class="s-order">Orden <strong id="s-order-id">#AR-000000</strong></p>
+    <div class="s-details" id="s-details"></div>
+    <button class="btn btn-dark btn-block" data-close>Volver a la tienda</button>
+  </dialog>
+
+  <dialog class="modal legal-modal" id="legal-modal">
+    <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+    <div id="legal-body"></div>
+  </dialog>
+
+  <button class="to-top" id="to-top" title="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+  <div class="toast-wrap" id="toast-wrap"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
